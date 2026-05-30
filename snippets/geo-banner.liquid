@@ -1,0 +1,22 @@
+{% assign country = localization.country.iso_code %}
+{% assign region_class = 'global' %}
+{% assign region_message = '🌐 Worldwide shipping available at checkout' %}
+
+{% case country %}
+  {% when 'NG', 'GH', 'KE', 'ZA' %}
+    {% assign region_class = 'africa' %}
+    {% assign region_message = '🌍 Free shipping across Africa on orders over ₦50,000' %}
+  {% when 'GB', 'DE', 'FR', 'NL', 'IT', 'ES' %}
+    {% assign region_class = 'europe' %}
+    {% assign region_message = '🇪🇺 Free EU shipping on orders over £75' %}
+  {% when 'US', 'CA' %}
+    {% assign region_class = 'north-america' %}
+    {% assign region_message = '🇺🇸 Free US shipping on orders over $100' %}
+  {% when 'AU', 'NZ', 'SG', 'JP' %}
+    {% assign region_class = 'apac' %}
+    {% assign region_message = '🌏 Free APAC shipping on orders over $150 AUD' %}
+{% endcase %}
+
+<div class="geo-banner {{ region_class }}">
+  <p>{{ region_message }}</p>
+</div>
