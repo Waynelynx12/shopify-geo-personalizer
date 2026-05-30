@@ -1,0 +1,39 @@
+{% assign country = localization.country.iso_code %}
+{% assign currency_code = localization.country.currency.iso_code %}
+{% assign currency_symbol = localization.country.currency.symbol %}
+
+<div class="currency-router" data-country="{{ country }}" data-currency="{{ currency_code }}">
+
+  {% case country %}
+    {% when 'NG', 'GH' %}
+      <div class="local-pricing africa">
+        <span class="currency-badge">{{ currency_symbol }} {{ currency_code }}</span>
+        <p class="pricing-note">Prices shown in local currency</p>
+      </div>
+
+    {% when 'GB', 'DE', 'FR', 'NL', 'IT', 'ES' %}
+      <div class="local-pricing europe">
+        <span class="currency-badge">{{ currency_symbol }} {{ currency_code }}</span>
+        <p class="pricing-note">VAT included in all prices</p>
+      </div>
+
+    {% when 'US', 'CA' %}
+      <div class="local-pricing north-america">
+        <span class="currency-badge">{{ currency_symbol }} {{ currency_code }}</span>
+        <p class="pricing-note">Free returns on all orders</p>
+      </div>
+
+    {% when 'AU', 'NZ', 'SG', 'JP' %}
+      <div class="local-pricing apac">
+        <span class="currency-badge">{{ currency_symbol }} {{ currency_code }}</span>
+        <p class="pricing-note">Express shipping available</p>
+      </div>
+
+    {% else %}
+      <div class="local-pricing global">
+        <span class="currency-badge">{{ currency_symbol }} {{ currency_code }}</span>
+        <p class="pricing-note">International shipping available</p>
+      </div>
+  {% endcase %}
+
+</div>
