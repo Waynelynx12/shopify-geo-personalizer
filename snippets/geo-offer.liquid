@@ -1,0 +1,45 @@
+{% assign country = localization.country.iso_code %}
+{% assign has_offer = false %}
+
+{% case country %}
+  {% when 'NG', 'GH', 'KE', 'ZA' %}
+    {% assign has_offer = true %}
+    {% assign offer_title = 'Exclusive Africa Offer' %}
+    {% assign offer_message = 'Use code AFRICA15 for 15% off your first order' %}
+    {% assign offer_class = 'offer-africa' %}
+    {% assign offer_expiry = '2026-12-31' %}
+
+  {% when 'GB', 'DE', 'FR', 'NL', 'IT', 'ES' %}
+    {% assign has_offer = true %}
+    {% assign offer_title = 'EU Welcome Offer' %}
+    {% assign offer_message = 'Use code EU10 for 10% off plus free shipping' %}
+    {% assign offer_class = 'offer-europe' %}
+    {% assign offer_expiry = '2026-12-31' %}
+
+  {% when 'US', 'CA' %}
+    {% assign has_offer = true %}
+    {% assign offer_title = 'US Exclusive Deal' %}
+    {% assign offer_message = 'Use code USA20 for 20% off orders over $150' %}
+    {% assign offer_class = 'offer-na' %}
+    {% assign offer_expiry = '2026-12-31' %}
+
+  {% when 'AU', 'NZ', 'SG', 'JP' %}
+    {% assign has_offer = true %}
+    {% assign offer_title = 'APAC Special Offer' %}
+    {% assign offer_message = 'Use code APAC12 for 12% off your order' %}
+    {% assign offer_class = 'offer-apac' %}
+    {% assign offer_expiry = '2026-12-31' %}
+{% endcase %}
+
+{% if has_offer %}
+  <div class="geo-offer {{ offer_class }}">
+    <h4 class="offer-title">{{ offer_title }}</h4>
+    <p class="offer-message">{{ offer_message }}</p>
+    <p class="offer-expiry">Offer valid until {{ offer_expiry }}</p>
+    <button class="copy-code-btn"
+      onclick="navigator.clipboard.writeText(this.dataset.code)"
+      data-code="{{ offer_message | split: 'code ' | last | split: ' ' | first }}">
+      Copy Code
+    </button>
+  </div>
+{% endif %}
